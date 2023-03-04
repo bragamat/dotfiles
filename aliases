@@ -1,0 +1,123 @@
+# Based on Skwp's aliases
+# https://raw.githubusercontent.com/skwp/dotfiles/997d36bef991652dd436c076e57d8f00c49f4994/zsh/aliases.zsh
+ccdf=$HOME/.station-dotfiles
+os_family=`echo $(uname) | tr '[:upper:]' '[:lower:]'`
+# global
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+# PS
+alias psa="ps aux"
+alias psg="ps aux | grep "
+# Moving around
+alias cdb='cd -'
+alias cls='clear;ls'
+alias clr='clear'
+# Show human friendly numbers and colors
+alias df='df -h'
+alias du='du -h -d 2'
+alias ll='ls -lGh'
+alias la='ll -a'
+alias ls='ls -Gh'
+# Alias Editing
+alias ae='vim $ccdf/aliases' #alias edit
+alias ar='source $ccdf/aliases'  #alias reload
+# Local
+alias ael="vim $HOME/.aliases.local"
+alias arl="source $HOME/.aliases.local"
+# Search Alias
+alias aliass='alias | grep'
+# vim using
+mvim --version > /dev/null 2>&1
+MACVIM_INSTALLED=$?
+if [ $MACVIM_INSTALLED -eq 0 ]; then
+  alias vim="mvim -v"
+fi
+# mimic vim functions
+alias :q='exit'
+# vimrc editing
+alias ve='vim $HOME/.vimrc'
+# zsh profile editing
+alias ze='vim $HOME/.zshrc'
+alias zr='source $HOME/.zshrc'
+alias zrl='source $HOME/.zshrc.local'
+# history
+alias hfull='history 1 -1'
+# Git Aliases
+alias gs='git status'
+alias ga='git add -A'
+alias gf='git fetch'
+alias gd='git diff'
+alias gb='git b'
+alias gpl='git pull'
+alias gplo='git pull --rebase'
+alias gpso='git push origin HEAD'
+alias gpforce='git push origin HEAD --force-with-lease'
+
+# docker
+alias d="docker"
+alias dc="docker-compose"
+alias dprune="docker system prune"
+alias dclean="docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq)"
+
+# Common shell functions
+alias cl='clear'
+
+# Rspec
+alias rs='rspec'
+
+if [[ $os_family == 'darwin' ]]
+then
+  # Finder
+  alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+  alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+  # Homebrew
+  alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
+  alias mykey="cat $HOME/.ssh/id_rsa.pub | pbcopy"
+fi
+
+if [[ $os_family == 'linux' ]]
+then
+  alias ll='ls -lh --color=auto'
+  alias ls='ls --color=auto'
+  alias mykey="cat $HOME/.ssh/id_rsa.pub | xclip -i -selection clipboard"
+fi
+
+alias cad='cd ~/workspace/codingaction'
+alias cbt='cd ~/workspace/clearbit'
+alias ops='cd ~/workspace/open-source'
+
+alias gco='git checkout'
+alias gcm='git checkout main'
+alias gcmaster='git checkout master'
+alias grmhard='git reset origin/main --hard'
+alias grmasterhard='git reset origin/master --hard'
+
+alias k='kubectl'
+alias py='python'
+
+alias h='history'
+alias t='tmux'
+
+alias cb-prod="cb env --reset us-west-1.prod"
+alias cb-stag="cb env --reset staging-eks1"
+alias cb-dev="cb env --reset dev-eks1"
+
+
+# your aliases
+[[ -f $HOME/.aliases.local ]] && source $HOME/.aliases.local
+
+# vim: ft=zsh
+# #!/usr/bin/env bash
+
+# export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-"$HOME/.local/share/lunarvim"}"
+# export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-"$HOME/.config/lvim"}"
+# export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-"$HOME/.cache/lvim"}"
+
+
+
+alias lvim="/Users/mateusbraga/.local/bin/lvim"
+alias home="cd ~/home"
+alias dotfiles="cd ~/home/organization/tools/dotfiles"
+
+
