@@ -1,0 +1,2 @@
+# DOTFILE
+* neovim
