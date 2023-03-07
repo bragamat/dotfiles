@@ -2,7 +2,6 @@ require('rose-pine').setup({
     disable_background = true
 })
 
-
 function SetTheme(theme)
 	theme = theme or "rose-pine"
 	vim.cmd.colorscheme(theme)
