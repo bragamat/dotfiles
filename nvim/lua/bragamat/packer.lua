@@ -6,10 +6,37 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use {
+    'williamboman/mason.nvim',
+    run = function()
+      pcall(vim.cmd, 'MasonUpdate')
+    end,
+  }
+  use { 'williamboman/mason-lspconfig.nvim' }
+  use 'neovim/nvim-lspconfig'
+
   use 'tpope/vim-commentary'
   use 'tpope/vim-fugitive'
   use 'ryanoasis/vim-devicons'
   use 'nvim-tree/nvim-web-devicons'
+  use 'mattn/emmet-vim'
+  use 'rescript-lang/vim-rescript'
+  use 'preservim/nerdtree'
+  use 'thoughtbot/vim-rspec'
+  use 'vim-ruby/vim-ruby'
+
+  use 'romgrk/barbar.nvim'
+
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use 'nkrkv/nvim-treesitter-rescript'
+
+  use "lukas-reineke/lsp-format.nvim"
+  use 'ray-x/go.nvim'
+  use { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }
+  use {
+    'nvim-lualine/lualine.nvim',
+    require('lualine').setup()
+  }
 
   use { 'alexghergh/nvim-tmux-navigation', config = function()
     local nvim_tmux_nav = require('nvim-tmux-navigation')
@@ -28,9 +55,10 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     -- or                            , branch = '0.1.x',
-    requires = { { 'nvim-lua/plenary.nvim' } }
+    requires = { 'nvim-lua/plenary.nvim' }
   }
-  use({ "kelly-lin/telescope-ag", requires = { { "nvim-telescope/telescope.nvim" } } })
+  use { "kelly-lin/telescope-ag" }
+
   use({
     'rose-pine/neovim',
     as = 'rose-pine',
@@ -38,7 +66,6 @@ return require('packer').startup(function(use)
       vim.cmd('colorscheme rose-pine')
     end
   })
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   -- use {
   --   'nvim-tree/nvim-tree.lua',
   --   requires = {
@@ -48,33 +75,17 @@ return require('packer').startup(function(use)
   -- }
   use {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
+    branch = 'v2.x',
     requires = {
-      -- LSP Support
-      { 'neovim/nvim-lspconfig' },          -- Required
-      { 'williamboman/mason.nvim' },        -- Optional
-      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-      -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },      -- Required
-      { 'hrsh7th/cmp-nvim-lsp' },  -- Required
-      { 'hrsh7th/cmp-buffer' },    -- Optional
-      { 'hrsh7th/cmp-path' },      -- Optional
-      { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-      { 'hrsh7th/cmp-nvim-lua' },  -- Optional
-
-      -- Snippets
-      { 'L3MON4D3/LuaSnip' },          -- Required
-      { 'rafamadriz/friendly-snippets' }, -- Optional
+      { 'hrsh7th/nvim-cmp' },         -- Required
+      { 'hrsh7th/cmp-nvim-lsp' },     -- Required
+      { 'L3MON4D3/LuaSnip' },         -- Required
     }
   }
 
-  use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
-  use('nkrkv/nvim-treesitter-rescript')
-  use('vim-ruby/vim-ruby')
   use({
     "kylechui/nvim-surround",
-    tag = "*",   -- Use for stability; omit to use `main` branch for the latest features
+    tag = "*",     -- Use for stability; omit to use `main` branch for the latest features
     config = function()
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
@@ -85,5 +96,4 @@ return require('packer').startup(function(use)
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
-  use ("preservim/nerdtree")
 end)

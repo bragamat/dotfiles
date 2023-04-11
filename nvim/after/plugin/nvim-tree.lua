@@ -1,5 +1,37 @@
 -- nnoremap <C-t> :NERDTreeToggle<CR>
-vim.keymap.set("n", "<C-\\>", ":NERDTreeToggle<CR>")
+-- local isOpen = vim.cmd("g:NERDTree.IsOpen()")
+
+-- function ToggleNerdTree()
+--   print(isOpen)
+--   if isOpen then
+--     vim.cmd(":NERDTreeToggle<CR>")
+--   else
+--     vim.cmd(":NERDTreeFind <CR>")
+--   end
+-- end
+-- -- " ==== NERD tree
+-- " Open the project tree and expose current file in the nerdtree with Ctrl-\
+-- command! LocalCloseNerdTree call CloseNerdTree()
+
+-- nnoremap <silent> <C-\> :LocalCloseNerdTree<cr>
+-- vim.keymap.set("n", "<C-\\>", ":LocalCloseNerdTree<CR>")
+-- vim.keymap.set("n", "<C-\\>", ":NERDTreeToggle<CR>")
+vim.cmd("function! CloseNerdTree() \
+  if g:NERDTree.IsOpen() \
+    NERDTreeClose \
+  else \
+    NERDTreeFind \
+  endif \
+endfunction \
+command! LocalCloseNerdTree call CloseNerdTree() \
+nnoremap <silent> <C-\\> :LocalCloseNerdTree<cr> \
+")
+-- vim.keymap.set("n", "<C-\\>", ":lua ToggleNerdTree()<CR>")
+-- vim.cmd("autocmd BufRead * call SyncTree()")
+-- vim.api.autocmd("BufRead", "call SyncTree()")
+
+
+
 ----vim.g.loaded_netrw = 1
 ----vim.g.loaded_netrwPlugin = 1
 --vim.keymap.set("n", "<C-\\>", ":NvimTreeToggle<CR>")
